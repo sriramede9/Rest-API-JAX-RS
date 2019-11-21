@@ -16,6 +16,8 @@ public class ProfileService {
 	public ProfileService() {
 		super();
 		// TODO Auto-generated constructor stub
+		// profiles.put(1l, new Profile(1, "Jai", "Sri", new Date()));
+//		profiles.put(2l, new Profile(2, "Veo", "Ede", new Date()));
 	}
 
 	public Profile getProfile(Long l) {
@@ -36,17 +38,11 @@ public class ProfileService {
 		return p;
 	}
 
-	public Profile removeProfile(Profile p) {
-		return profiles.remove(p);
+	public Profile removeProfile(Long id) {
+		return profiles.remove(id);
 	}
 
 	public List<Profile> getProfileList() {
-
-		List<Profile> messageList = new ArrayList();
-
-		profiles.put(1l, new Profile(1, "Jai", "Sri", new Date()));
-		profiles.put(2l, new Profile(2, "Veo", "Ede", new Date()));
-		// messageList.add(new Message(3, "Timon and Pumba", new Date(), "Sri"));
 
 		return new ArrayList<Profile>(profiles.values());
 	}

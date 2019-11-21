@@ -15,6 +15,9 @@ public class MessageService {
 	public MessageService() {
 		super();
 		// TODO Auto-generated constructor stub
+		// messages.put(1l, new Message(1, "Ta Ta daa!", new Date(), "Sri"));
+		// messages.put(2l, new Message(2, "Hakuna Matata!", new Date(), "Sri"));
+		// messages.put(3l, new Message(3, "Timon and Pumba", new Date(), "Sri"));
 	}
 
 	public Message getMessage(Long l) {
@@ -22,6 +25,7 @@ public class MessageService {
 	}
 
 	public Message addMessage(Message m) {
+
 		m.setId(messages.size() + 1);
 		messages.put(m.getId(), m);
 		return m;
@@ -35,17 +39,13 @@ public class MessageService {
 		return m;
 	}
 
-	public Message removeMessage(Message m) {
-		return messages.remove(m);
+	public Message removeMessage(long id) {
+		return messages.remove(id);
 	}
 
 	public List<Message> getMessageList() {
 
 		List<Message> messageList = new ArrayList();
-
-		messages.put(1l, new Message(1, "Ta Ta daa!", new Date(), "Sri"));
-		messages.put(2l, new Message(2, "Hakuna Matata!", new Date(), "Sri"));
-		// messageList.add(new Message(3, "Timon and Pumba", new Date(), "Sri"));
 
 		return new ArrayList<Message>(messages.values());
 	}
