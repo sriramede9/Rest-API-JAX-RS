@@ -16,8 +16,8 @@ public class ProfileService {
 	public ProfileService() {
 		super();
 		// TODO Auto-generated constructor stub
-		// profiles.put(1l, new Profile(1, "Jai", "Sri", new Date()));
-//		profiles.put(2l, new Profile(2, "Veo", "Ede", new Date()));
+		profiles.put(1l, new Profile(1, "Jai", "Sri", new Date()));
+		profiles.put(2l, new Profile(2, "Veo", "Ede", new Date()));
 	}
 
 	public Profile getProfile(Long l) {
