@@ -25,6 +25,13 @@ public class Message {
 		this.author = author;
 	}
 
+	public Message(String message, Date created, String author) {
+		super();
+		this.message = message;
+		this.created = created;
+		this.author = author;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -49,7 +56,7 @@ public class Message {
 		this.created = created;
 	}
 
-	public String getAuthor() { 
+	public String getAuthor() {
 		return author;
 	}
 
