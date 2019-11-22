@@ -85,4 +85,11 @@ public class MessageResource {
 
 	}
 
+	//@GET
+	@Path(value = "/{mId}/comments")
+	 @Produces(MediaType.APPLICATION_XML)
+	public CommentResource getCommentResource() {
+		return new CommentResource();
+	}
+
 }

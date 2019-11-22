@@ -8,29 +8,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
-public class Message {
+public class Comment {
 
 	private long id;
 	private String message;
 	private Date created;
 	private String author;
-	private Map<Long, Comment> comments = new HashMap<>();
+	
 
-	public Message() {
+	public Comment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Message(long id, String message, Date created, String author) {
+	public Comment(long id, String message, Date created, String author) {
 		super();
 		this.id = id;
-		this.message = message;
-		this.created = created;
-		this.author = author;
-	}
-
-	public Message(String message, Date created, String author) {
-		super();
 		this.message = message;
 		this.created = created;
 		this.author = author;
@@ -70,15 +62,9 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", message=" + message + ", created=" + created + ", author=" + author + "]";
+		return "Comment [id=" + id + ", message=" + message + ", created=" + created + ", author=" + author + "]";
 	}
 
-	@XmlTransient
-	public Map<Long, Comment> getComments() {
-		return comments;
-	}
 
-	public void setComments(Map<Long, Comment> comments) {
-		this.comments = comments;
-	}
+
 }
