@@ -88,7 +88,7 @@ public class MessageService {
 		}
 
 		//System.out.println(
-				"vaues in temp are from " + temp.get(0).getId() + "/t and total of them are " + temp.size() + temp);
+			//	"vaues in temp are from " + temp.get(0).getId() + "/t and total of them are " + temp.size() + temp);
 
 		return temp;
 	}

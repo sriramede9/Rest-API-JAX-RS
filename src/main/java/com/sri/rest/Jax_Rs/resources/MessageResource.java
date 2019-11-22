@@ -2,6 +2,7 @@ package com.sri.rest.Jax_Rs.resources;
 
 import java.util.List;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,13 +11,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.sri.rest.Jax_Rs.model.Message;
-import com.sri.rest.Jax_Rs.model.Profile;
 import com.sri.rest.Jax_Rs.service.MessageService;
-import com.sri.rest.Jax_Rs.service.ProfileService;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -36,20 +34,19 @@ public class MessageResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
-			@QueryParam("size") int size) {
+	public List<Message> getMessages(@BeanParam MessageFileterBean bean) {
 
-		System.out.println(year);
+		// System.out.println(year);
 
-		if (year > 0) {
+		if (bean.getYear() > 0) {
 
-			return ms.getMessagesbyYear(year); // filetering by year if
-												// added query param ?year=2018
+			return ms.getMessagesbyYear(bean.getYear()); // filetering by year if
+			// added query param ?year=2018
 		}
 
-		if (start > 0 && size > 0) {
+		if (bean.getStart() > 0 && bean.getSize() > 0) {
 
-			return ms.getAllMessagesPaginated(start, size);
+			return ms.getAllMessagesPaginated(bean.getStart(), bean.getSize());
 		}
 
 		return ms.getMessageList();
