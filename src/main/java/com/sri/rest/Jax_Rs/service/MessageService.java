@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sri.rest.Jax_Rs.database.DatabaseClass;
+import com.sri.rest.Jax_Rs.exception.MessageNotFoundException;
 import com.sri.rest.Jax_Rs.model.Message;
 
 public class MessageService {
@@ -24,7 +25,14 @@ public class MessageService {
 	}
 
 	public Message getMessage(Long l) {
-		return messages.get(l);
+
+		Message message = messages.get(l);
+
+		if (message == null) {
+			throw new MessageNotFoundException("No message Found with the given id");
+		}
+
+		return message;
 	}
 
 	public Message addMessage(Message m) {
@@ -87,8 +95,9 @@ public class MessageService {
 
 		}
 
-		//System.out.println(
-			//	"vaues in temp are from " + temp.get(0).getId() + "/t and total of them are " + temp.size() + temp);
+		// System.out.println(
+		// "vaues in temp are from " + temp.get(0).getId() + "/t and total of them are "
+		// + temp.size() + temp);
 
 		return temp;
 	}

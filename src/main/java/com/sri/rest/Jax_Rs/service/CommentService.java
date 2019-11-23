@@ -8,8 +8,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import com.sri.rest.Jax_Rs.database.DatabaseClass;
 import com.sri.rest.Jax_Rs.model.Comment;
+import com.sri.rest.Jax_Rs.model.ErrorMessage;
 import com.sri.rest.Jax_Rs.model.Message;
 import com.sri.rest.Jax_Rs.model.Comment;
 
@@ -38,9 +43,26 @@ public class CommentService {
 
 	public Comment getCommentById(Long messageId, Long commentid) {
 
+		// bilding a response object for webapplicationexception
+
+		ErrorMessage em = new ErrorMessage("No such object", 404, "The given id is not in the database to fetch");
+
+		// Response.noContent().entity(em).build();
+		Response response = Response.status(Status.NOT_FOUND).entity(em).build();
+
+		Message message = messages.get(messageId);
+		if (message == null) {
+			throw new WebApplicationException(response);
+		}
 		Map<Long, Comment> comments = messages.get(messageId).getComments();
 
-		System.out.println(comments);
+		// System.out.println(comments);
+
+		Comment comment = comments.get(commentid);
+
+		if (comment == null) {
+			throw new WebApplicationException(response);
+		}
 
 		return comments.get(commentid);
 	}
@@ -62,8 +84,7 @@ public class CommentService {
 		}
 		comments.put(comment.getId(), comment);
 		System.out.println(comments);
-		
-		
+
 		return comment;
 	}
 
