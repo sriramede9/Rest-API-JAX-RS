@@ -62,13 +62,45 @@ public class MessageResource {
 	@GET
 	@Path(value = "{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public Response getMessagebyId(@PathParam("id") long id) {
+	public Response getMessagebyId(@PathParam("id") long id, @Context UriInfo uriInfo) {
+
+		String uri = GetSelfString(id, uriInfo);
 
 		Message message = ms.getMessage(id);
+
+		String profile = GetProfileString(uriInfo, message);
+		String comments = GetCommentsString(uriInfo, message);
+
+		message.addLink(uri, "self");
+		message.addLink(profile, "profile");
+		message.addLink(comments, "comments");
 
 		return Response.accepted(message).build();
 
 		// return ms.getMessage(id);
+	}
+
+	private String GetCommentsString(UriInfo uriInfo, Message message) {
+
+		String uri = uriInfo.getBaseUriBuilder().path(CommentResource.class).path(message.getAuthor()).build()
+				.toString();
+
+		return uri;
+
+	}
+
+	private String GetProfileString(UriInfo uriInfo, Message message) {
+		// TODO Auto-generated method stub
+		String uri = uriInfo.getBaseUriBuilder().path(ProfileResource.class).build()
+				.toString();
+
+		return uri;
+	}
+
+	private String GetSelfString(long id, UriInfo uriInfo) {
+		String uri = uriInfo.getAbsolutePathBuilder().path(MessageResource.class).path(Long.toString(id)).build()
+				.toString();
+		return uri;
 	}
 
 	@POST
